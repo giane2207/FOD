@@ -51,10 +51,11 @@ type
       posMin := 1;
       for i := 1 to cantArchivos do begin
         if (regd[i].cod <= regd[posMin].cod) then
+            min := regd[i];
             posMin := i;
       end;
 
-      min := regd[posMin];
+     
       leer(detalles[posMin], regd[posMin]);
     end;
     procedure actualizarMaestro(var mae: maestro; var det: arch_detalle; var regd: reg_detalle);
