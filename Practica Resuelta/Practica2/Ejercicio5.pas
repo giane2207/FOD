@@ -11,6 +11,7 @@ Notas:
     ● El archivo maestro debe crearse en la siguiente ubicación física: /var/log.}
 
 program Ejercicio5;
+Uses SysUtils;
 const
     valorAlto = '9999';
     cantArchivos = 5;
@@ -83,6 +84,8 @@ type
           actual.tiempo := totalTiempo;
           write(mae, actual);
         end;
+
+        
       end;
 
      close(mae);
@@ -97,7 +100,7 @@ var
     i: integer;
     nro_detalle: String;
 begin
-    assign(mae, '/var/log/servidor');
+    assign(mae, 'servidor');
 
     for i := 1 to cantArchivos do begin
         nro_detalle := IntToStr(i);
