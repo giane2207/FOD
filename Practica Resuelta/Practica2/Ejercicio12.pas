@@ -27,13 +27,19 @@ type
        totalDia, totalMes, totalAnio, totalUser: real;
        anioActual: String[4];
        diaActual, mesActual, idUser: integer;
+       encontrado: boolean;
     begin
-        reset(mae);
-        leer(mae,regMae);
-        while (regMae.anio <> valorAlto) and (regMae.anio <> anio) do
-            leer(mae, regMae);
+        encontrado := false;
 
-        if regMae.anio <> valorAlto then begin
+        leer(mae, regMae);
+        while (regMae.anio <> valorAlto) and (not encontrado) do begin
+            if regMae.anio = anio then
+                encontrado := true
+            else
+                leer(mae, regMae);
+        end;
+
+        if encontrado then begin
             seek(mae, filePos(mae)-1);
             
             writeln('Anio: ', anio);
@@ -70,8 +76,8 @@ type
             end;
 
             writeln('Tiempo total de acceso al anio ', anio, ': ', totalAnio);
-        end
-        else writeln('No se encontro el anio');
+            
+        end else writeln('No se encontro el anio');
 
         close(mae);
     end;
