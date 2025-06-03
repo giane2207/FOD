@@ -54,8 +54,6 @@ type
             min := regd[i];
             posMin := i;
       end;
-
-     
       leer(detalles[posMin], regd[posMin]);
     end;
     procedure actualizarMaestro(var mae: maestro; var det: arch_detalle; var regd: reg_detalle);

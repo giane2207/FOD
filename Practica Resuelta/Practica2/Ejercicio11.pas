@@ -41,15 +41,14 @@ type
     procedure informar (var mae: maestro, valoresHora: vectorValoresHora);
     var
         depto: String[4];
-        division: integer;
         regMae: empleado;
-        horasEmpleado, horasDivision, horasDepto, division, numEmpleado, categoria: integer;
+        horasEmpleado, horasDivision, 
+        horasDepto, division, numEmpleado, categoria: integer;
         importeEmpleado, importeDivision, importeDepto,: real;
     begin
         reset(mae);
         leer(mae, regMae);
         
-
         while (regMae.depto <> valorAlto) do begin
             depto:= regMae.depto;
             horasDepto:= 0;
@@ -61,6 +60,7 @@ type
                 division := regMae.division;
                 horasDivision := 0;
                 importeDivision := 0;
+                writeln('Division: ', division);
 
                 while (depto = regMae.depto) and (division = regMae.division) do begin
                     numEmpleado := regMae.numEmpleado;
@@ -72,19 +72,26 @@ type
                         horasEmpleado := horasEmpleado + regMae.horasExtras;
                         leer(mae, regMae);
                     end;
-
+            
                     importeEmpleado := importeEmpleado + (horasEmpleado * valoresHora[categoria]);
+                    writeln('Numero de Empleado: ', numEmpleado, ' Total de horas: ', horasEmpleado, ' Importe a cobrar: $', importeEmpleado:0:2);
                 end;
 
                 horasDivision := horasDivision + horasEmpleado;
                 importeDivision := importeDivision + importeEmpleado;
+                writeln('Total de horas de la division: ', horasDivision);
+                writeln('Monto total de la division: $', importeDivision:0:2);
             end;
             
             horasDepto := horasDepto + horasDivision;
             importeDepto := importeDepto + importeDivision;
+            writeln('Total horas del departamento:', horasDepto);
+            writeln('Monto total del departamento: $', importeDepto:0:2);
         end;
-        
+
+        close(mae);
     end;
+
 var
     archValoresHora: txt;
     mae: maestro;
